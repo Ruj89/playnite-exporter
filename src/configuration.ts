@@ -47,7 +47,7 @@ export class Configuration {
     configuration.logger.debug(`${["Configurations:",
       ...Object.entries(debuggedConfiguration)
         .filter(([_, value]) => typeof value === 'string')
-        .map(([key, value]) => `- ${key}: ${value}`)]
+        .map(([key, value]) => `\t- ${key}: ${value}`)]
       .join("\n")}`);
   }
 }

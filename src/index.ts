@@ -1,3 +1,4 @@
+import { backupAnalyzer, BackupAnalyzer } from './backupanalyzer';
 import { CloudStorage, cloudStorage } from './cloudstorage';
 import { Configuration, configuration, ConfigurationError } from './configuration';
 import logger from './logger';
@@ -15,8 +16,12 @@ async function main() {
   if (!cloudStorage) throw new Error('Cloud storage not started correctly');
 
   // List the last synchonized elements
-  const zipFiles = await cloudStorage.list();
-  zipFiles.map(zipFile => zipFile)
+  //const zipFiles = await cloudStorage.list();
+  //const zipFilePath = await cloudStorage.download(zipFiles[0]);
+  const zipFilePath = "/tmp/playnite-exporter-vOJhWJ/PlayniteBackup-2024-10-26-18-54-42.zip"
+  BackupAnalyzer.launch(logger, zipFilePath);
+  if (!backupAnalyzer) throw new Error('Backup analyzer not started correctly');
+  await backupAnalyzer.analyze();
 }
 
 /** An error that needs to be throwed */
